@@ -69,16 +69,8 @@ npm install nodemon --save-dev
 
 - JWT_SECRET_KEY=<USE UMA HASH A SUA ESCOLHA>
 
-##### Relação entre as tabelas do Data-Base
-
-- Um usuário pode ter muitos medicamentos (User -> UserMedicines -> Medicine).
-- Um usuário pode ter muitos medicamentos (User -> UserMedicines -> Medicine).
-- Cada medicamento, em cada depósito, só pode ter um usuário associado (Medicine -> Warehouse).
-- Medicamentos podem se repetir em warehouses diferentes.
-- Um usuário pode ter N depósitos (User -> UserWarehouses -> Warehouse).
-- Um usuário pode ter N medicamentos registrados em qualquer um dos depósitos, mesmo que não tenha criado os depósitos.
+#### Relação entre as tabelas do Data-Base
 ##### Diagrama da estrutura do database 
-
 ![Diagrama do DB](Diagrama.drawio.png)
 ##### Descrição dos end-points
 
