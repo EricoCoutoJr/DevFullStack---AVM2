@@ -98,4 +98,6 @@ Users.associate= (models) => {
     });
   };
 
+
+
 module.exports = { Users }

@@ -2,12 +2,12 @@ const { STRING, DATE, INTEGER, FLOAT, DataTypes } = require('sequelize')
 const { connection } = require('../database/connection')
 
 
-
 const Warehouses = connection.define("warehouses", {
     created_by:{
         //Esta coluna faz relação tem com o usuário que criou o medicamento
         type: INTEGER,
         allowNull: false,
+        foreignKey: true,
         references: {
             model: {
                 tableName: 'users'
@@ -175,5 +175,6 @@ Warehouses.associate = (models) => {
       allowNull: false,
     });
   };
+
 
 module.exports = { Warehouses }

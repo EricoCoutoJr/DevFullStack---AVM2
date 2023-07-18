@@ -1,5 +1,4 @@
 const { sign } = require('jsonwebtoken');
-const { Op } = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config();
 const { Users  } = require('../models/users')

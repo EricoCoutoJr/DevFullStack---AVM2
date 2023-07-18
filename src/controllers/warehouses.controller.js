@@ -197,7 +197,7 @@ class WarehousesController {
             }
             const warehouse = await Warehouses.findOne({ where: { id }})
             if (!warehouse) return response.status(404).send({
-                                                            msg: 'Usuário não encontrado.'
+                                                            msg: 'Depósito não encontrado.'
                                                         })
             return response.status(200).send({warehouse})
         } catch (error) {

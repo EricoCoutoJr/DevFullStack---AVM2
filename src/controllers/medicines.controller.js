@@ -98,13 +98,13 @@ class MedicinesController {
             }
             const medicine = await Medicines.findOne({ where: { id }})
             if (!medicine) return response.status(404).send({
-                                                            msg: 'Usuário não encontrado.'
+                                                            msg: 'Medicamento não encontrado.'
                                                         })
             await Medicines.update(
                 { desc, price, quantiti },
                 { where: { id } }
             )
-            return response.status(200).send(id)
+            return response.status(200).send(medicine)
         } catch (error) {
             const statusCode = error.message.type || 400;
             const message = error.message.msg || error.message;
@@ -120,12 +120,12 @@ class MedicinesController {
 
     async listMedicinesByType(request, response){
         try {
-            const { type } = request.query.type
-            const data = null
+            const { type } = request.query
+            var data = null
             if (!type) {
-                data = await Warehouses.findAll()
+                data = await Medicines.findAll()
             } else {
-                data = await Warehouses.findAll({ where: { type } })
+                data = await Medicines.findAll({ where: { type } })
             }
             return response.status(200).send(data)
         } catch (error) {
@@ -149,7 +149,7 @@ class MedicinesController {
             }
             const medicine = await Medicines.findOne({ where: { id }})
             if (!medicine) return response.status(404).send({
-                                                            msg: 'Usuário não encontrado.'
+                                                            msg: 'Medicamento não encontrado.'
                                                         })
             return response.status(200).send({medicine})
         } catch (error) {
@@ -173,10 +173,10 @@ class MedicinesController {
             }
             const medicine = await Medicines.findOne({ where: { id }})
             if (!medicine) return response.status(404).send({
-                                                            msg: 'Usuário não encontrado.'
+                                                            msg: 'Medicamento não encontrado.'
                                                         })
-            const data = await Medicines.destroy({whare: { id }})
-            return response.status(204).send(data)
+            await Medicines.destroy({ where: { id }})
+            return response.status(204).send()
         } catch (error) {
             return response.status(400).send(
                 {
