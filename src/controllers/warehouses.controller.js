@@ -138,12 +138,12 @@ class WarehousesController {
             if (!warehouse) return response.status(404).send({
                                                             msg: 'Depósito não encontrado.'
                                                         })
-            const status = ( warehouse.status === "Ativo" ) ? 'Inativo' : 'Ativo'
+            const status = ( warehouse.status === "ATIVO" ) ? 'INATIVO' : 'ATIVO'
             await Warehouses.update(
                 { status },
                 { where: { id } }
             )
-            return response.status(204).send()
+            return response.status(204).send('Status atualizado para '+ status)
         } catch (error) {
             const statusCode = error.message.status || 400;
             const message = error.message.msg || error.message;

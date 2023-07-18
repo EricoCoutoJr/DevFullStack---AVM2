@@ -133,12 +133,12 @@ class UsersController{
             if (!user) return response.status(404).send({
                                                             msg: 'Usuário não encontrado.'
                                                         })
-            const status = ( user.status === "Ativo" ) ? 'Inativo' : 'Ativo'
+            const status = ( user.status === "ATIVO" ) ? 'INATIVO' : 'ATIVO'
             await Users.update(
                 { status },
                 { where: { id } }
             )
-            return response.status(200).send("updateUserState...")
+            return response.status(200).send('Status atualizado para '+ status)
         } catch (error) {
             return response.status(401).send({
                 msg: "Erro enviado do banco de dados",
