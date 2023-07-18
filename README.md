@@ -110,5 +110,5 @@ npm install nodemon --save-dev
 [Click aqui]: https://sequelize.org/docs/v6/core-concepts/getters-setters-virtuals/
 [JWT - JSON Wab Token]: https://www.npmjs.com/package/jsonwebtoken
 [Express]: https://www.npmjs.com/package/express
-[PostgresSQL]: https://www.postgresql.org/
+[PostgreSQL]: https://www.postgresql.org/
 [NodeJS]: https://nodejs.org/en
