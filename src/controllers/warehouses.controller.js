@@ -125,7 +125,7 @@ class WarehousesController {
 
     async statusUpdateWarehouse(request, response){
         // Para Melhorar essa função seria necessário verificar se há medicamento 
-        // no depósito antes de inativá-lo.
+        // no depósito antes de inativá-lo, mas isso não faz parte da regra de negócio.
         try {
             const { id } = request.params
             const idtest = parseInt(id)
@@ -134,7 +134,7 @@ class WarehousesController {
                     msg: 'Valor do id tem que ser numérico e positivo.'
                 })
             }
-            const warehouse = await Users.findOne({ where: { id }})
+            const warehouse = await Warehouses.findOne({ where: { id }})
             if (!warehouse) return response.status(404).send({
                                                             msg: 'Depósito não encontrado.'
                                                         })
@@ -159,16 +159,18 @@ class WarehousesController {
 
     async listWarehouserByStatus(request, response){
         try {
-            const { status } = request.query.status
-            const data = null
+            const { status } = request.query
+            var data = null
+            console.log(status)
             if (!status) {
                 data = await Warehouses.findAll()
             } else {
                 data = await Warehouses.findAll(
                                     { where: { status } }
                                    )
-            }
+                                }
             return response.status(200).send(data)
+            
             
 
         } catch (error) {
