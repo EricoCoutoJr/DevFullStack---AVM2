@@ -38,18 +38,30 @@ const Medicines = connection.define("medicines", {
         allowNull: false,
         validate: {
             notNull: {msg: "O campo medicine é obrigatório."}
-        }
+        },
+        get() {
+            const rawValue = this.getDataValue('medicine');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     lab: {
         type: STRING,
         allowNull: false,
         validate: {
             notNull: {msg: "O campo lab é obrigatório."}
-        }
+        },
+        get() {
+            const rawValue = this.getDataValue('lab');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     desc: {
         type: STRING,
         allowNull: true,
+        get() {
+            const rawValue = this.getDataValue('desc');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     dosage: {
         type: DECIMAL,
@@ -59,27 +71,27 @@ const Medicines = connection.define("medicines", {
         }
     },
     unit: {
-        type: DataTypes.ENUM('mg', 'mcg', 'g', 'mL', '%', 'Outros'),
+        type: DataTypes.ENUM('mg', 'mcg', 'g', 'mL', '%', 'OUTROS'),
         allowNull: false,
         validate: {
             notNull: {
               msg: 'A unidade de medida do produto é obrigatória.'
             },
             isIn: {
-              args: [['mg', 'mcg', 'g', 'mL', '%', 'Outros']],
+              args: [['mg', 'mcg', 'g', 'mL', '%', 'OUTROS']],
               msg: 'A unidade de medida informada é inválida.'
             }
         }
     },
     type:{
-        type: DataTypes.ENUM('Controlado', 'Não controlado'),
+        type: DataTypes.ENUM('CONTROLADO', 'NÃO CONTROLADO'),
         allowNull: false,
         validate: {
             notNull: {
               msg: 'O campo type é obrigatória.'
             },
             isIn: {
-              args: [['Controlado', 'Não controlado']],
+              args: [['CONTROLADO', 'NÃO CONTROLADO']],
               msg: 'O campo type só pode receber os seguintes valores: Controlado, Não controlado'
             }
         }

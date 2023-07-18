@@ -27,7 +27,11 @@ const Warehouses = connection.define("warehouses", {
             notNull: {
               msg: 'A Razão Social é obrigatório.' // Mensagem de erro personalizada
         }},
-        unique: { msg: {"msg": "Razão Social já cadastrada.", "status": "409"}}
+        unique: { msg: {"msg": "Razão Social já cadastrada.", "status": "409"}},
+        get() {
+            const rawValue = this.getDataValue('razaosocial');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     nomefantasia: {
             type: STRING,
@@ -35,7 +39,11 @@ const Warehouses = connection.define("warehouses", {
             validate: {
                 notNull: {
                   msg: 'O Nome Fantasia é obrigatório.' // Mensagem de erro personalizada
-            }}
+            }},
+            get() {
+                const rawValue = this.getDataValue('nomefantasia');
+                return rawValue ? rawValue.toUpperCase() : null;
+              }
     },
     cnpj: {
         type: STRING,
@@ -56,7 +64,11 @@ const Warehouses = connection.define("warehouses", {
             isEmail: {msg: "Email Invalido"},
             notNull: { msg: "O email é obrigatório."}
         },
-        unique: { msg: {"msg": "Email já cadastrado.", "status": "409"}}
+        unique: { msg: {"msg": "Email já cadastrado.", "status": "409"}},
+        get() {
+            const rawValue = this.getDataValue('email');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     fone: {
         type: STRING,
@@ -80,7 +92,11 @@ const Warehouses = connection.define("warehouses", {
         validate: {
             notNull: {
               msg: 'O nome da rua é obrigatório.' // Mensagem de erro personalizada
-        }}
+        }},
+        get() {
+            const rawValue = this.getDataValue('street');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     num:{
         type: STRING,
@@ -96,7 +112,11 @@ const Warehouses = connection.define("warehouses", {
         validate: {
             notNull: {
               msg: 'O nome doo bairro é obrigatório.' // Mensagem de erro personalizada
-        }}
+        }},
+        get() {
+            const rawValue = this.getDataValue('neighborhood');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     city: {
         type: STRING,
@@ -104,7 +124,11 @@ const Warehouses = connection.define("warehouses", {
         validate: {
             notNull: {
               msg: 'O nome da cidade é obrigatório.' // Mensagem de erro personalizada
-        }}
+        }},
+        get() {
+            const rawValue = this.getDataValue('city');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     state: {
         type: STRING,
@@ -112,11 +136,19 @@ const Warehouses = connection.define("warehouses", {
         validate: {
             notNull: {
               msg: 'O Estado é obrigatório.' // Mensagem de erro personalizada
-        }}
+        }},
+        get() {
+            const rawValue = this.getDataValue('state');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     complement: {
         type: STRING,
-        allowNull: true
+        allowNull: true,
+        get() {
+            const rawValue = this.getDataValue('complement');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     lat: {        
         type: FLOAT,
@@ -153,8 +185,8 @@ const Warehouses = connection.define("warehouses", {
     status:{
         // Neste campo da tabela o item status as opções estão limitadas entre Ativo e Inativo
         // e por defaut assumirá como Ativo
-        type: DataTypes.ENUM('Ativo', 'Inativo'),
-        defaultValue: 'Ativo',
+        type: DataTypes.ENUM('ATIVO', 'INATIVO'),
+        defaultValue: 'ATIVO',
         allowNull: false
     },
     createdAt: DATE,

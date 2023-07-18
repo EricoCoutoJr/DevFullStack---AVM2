@@ -10,7 +10,7 @@ class UsersController{
             const {
                 name,
                 lastname,
-                geneder,
+                gender,
                 birthdate,
                 cpf,
                 fone,
@@ -21,7 +21,7 @@ class UsersController{
             const data = await Users.create({
                 name,
                 lastname,
-                geneder,
+                gender,
                 birthdate,
                 cpf,
                 fone,

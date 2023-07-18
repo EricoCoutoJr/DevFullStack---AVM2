@@ -50,11 +50,11 @@ module.exports = {
           allowNull: true
       },
       unit: {
-          type: Sequelize.ENUM('mg', 'mcg', 'g', 'mL', '%', 'Outros'),
+          type: Sequelize.ENUM('mg', 'mcg', 'g', 'mL', '%', 'OUTROS'),
           allowNull: false
       },
       type:{
-          type: Sequelize.ENUM('Controlado', 'Não controlado'),
+          type: Sequelize.ENUM('CONTROLADO', 'NÃO CONTROLADO'),
           allowNull: false
       },
       price:{

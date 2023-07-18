@@ -9,7 +9,12 @@ const Users = connection.define("users", {
             len: { args: [2, 20],
                    msg: 'O nome deve possuir entre 2 e 20 caracteres' },
             notNull: {msg: "O campo name é obrigatório."}
-        }},
+        },
+        get() {
+            const rawValue = this.getDataValue('name');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
+    },
     lastname: {
             type: STRING,
             allowNull: false,
@@ -17,10 +22,19 @@ const Users = connection.define("users", {
                 len: { args: [2, 20],
                        msg: 'O campo sobrenome deve possuir entre 2 e 20 caracteres' },
                 notNull: { msg: "O campo lastname é obrigatório."}
-        }},
+        },
+        get() {
+            const rawValue = this.getDataValue('lastname');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
+    },
     gender:{
         type: STRING,
-        allowNull: true
+        allowNull: true,
+        get() {
+            const rawValue = this.getDataValue('gender');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     birthdate: {
         type: DATEONLY,
@@ -59,7 +73,11 @@ const Users = connection.define("users", {
             isEmail: {msg: "Email Invalido"},
             notNull: { msg: "O campo email é obrigatório" }
         },
-        unique: {msg: { "msg":"Email já está cadastrado.", "status": "409"}}
+        unique: {msg: { "msg":"Email já está cadastrado.", "status": "409"}},
+        get() {
+            const rawValue = this.getDataValue('email');
+            return rawValue ? rawValue.toUpperCase() : null;
+          }
     },
     password: {
         type: STRING,
@@ -75,8 +93,8 @@ const Users = connection.define("users", {
     status:{
         // Neste campo da tabela o item status as opções estão limitadas entre Ativo e Inativo
         // e por defaut assumirá como Ativo
-        type: DataTypes.ENUM('Ativo', 'Inativo'),
-        defaultValue: 'Ativo',
+        type: DataTypes.ENUM('ATIVO', 'INATIVO'),
+        defaultValue: 'ATIVO',
         allowNull: false
     },
     createdAt: DATE,
