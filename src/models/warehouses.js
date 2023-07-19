@@ -32,9 +32,11 @@ const Warehouses = connection.define("warehouses", {
         }},
         unique: { msg: {"msg": "Razão Social já cadastrada.", "status": "409"}},
         get() {
-            const rawValue = this.getDataValue('razaosocial');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('razaosocial').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('razaosocial', value.toUpperCase());
+        },
     },
     nomefantasia: {
             type: STRING,
@@ -44,9 +46,11 @@ const Warehouses = connection.define("warehouses", {
                   msg: 'O Nome Fantasia é obrigatório.' // Mensagem de erro personalizada
             }},
             get() {
-                const rawValue = this.getDataValue('nomefantasia');
-                return rawValue ? rawValue.toUpperCase() : null;
-              }
+              return this.getDataValue('nomefantasia').toUpperCase();
+            },
+            set(value) {
+                this.setDataValue('nomefantasia', value.toUpperCase());
+            },
     },
     cnpj: {
         type: STRING,
@@ -69,9 +73,11 @@ const Warehouses = connection.define("warehouses", {
         },
         unique: { msg: {"msg": "Email já cadastrado.", "status": "409"}},
         get() {
-            const rawValue = this.getDataValue('email');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('email').toLowerCase();
+        },
+        set(value) {
+            this.setDataValue('email', value.toLowerCase());
+        },
     },
     fone: {
         type: STRING,
@@ -97,9 +103,11 @@ const Warehouses = connection.define("warehouses", {
               msg: 'O nome da rua é obrigatório.' // Mensagem de erro personalizada
         }},
         get() {
-            const rawValue = this.getDataValue('street');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('street').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('street', value.toUpperCase());
+        },
     },
     num:{
         type: STRING,
@@ -117,9 +125,11 @@ const Warehouses = connection.define("warehouses", {
               msg: 'O nome doo bairro é obrigatório.' // Mensagem de erro personalizada
         }},
         get() {
-            const rawValue = this.getDataValue('neighborhood');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('neighborhood').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('neighborhood', value.toUpperCase());
+        },
     },
     city: {
         type: STRING,
@@ -129,9 +139,11 @@ const Warehouses = connection.define("warehouses", {
               msg: 'O nome da cidade é obrigatório.' // Mensagem de erro personalizada
         }},
         get() {
-            const rawValue = this.getDataValue('city');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('city').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('city', value.toUpperCase());
+        },
     },
     state: {
         type: STRING,
@@ -141,17 +153,21 @@ const Warehouses = connection.define("warehouses", {
               msg: 'O Estado é obrigatório.' // Mensagem de erro personalizada
         }},
         get() {
-            const rawValue = this.getDataValue('state');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('state').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('state', value.toUpperCase());
+        },
     },
     complement: {
         type: STRING,
         allowNull: true,
         get() {
-            const rawValue = this.getDataValue('complement');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('complement').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('complement', value.toUpperCase());
+        },
     },
     lat: {        
         type: FLOAT,

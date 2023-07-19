@@ -11,9 +11,11 @@ const Users = connection.define("users", {
             notNull: {msg: "O campo name é obrigatório."}
         },
         get() {
-            const rawValue = this.getDataValue('name');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('name').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('name', value.toUpperCase());
+        },
     },
     lastname: {
             type: STRING,
@@ -24,17 +26,21 @@ const Users = connection.define("users", {
                 notNull: { msg: "O campo lastname é obrigatório."}
         },
         get() {
-            const rawValue = this.getDataValue('lastname');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('lastname').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('lastname', value.toUpperCase());
+        },
     },
     gender:{
         type: STRING,
         allowNull: true,
         get() {
-            const rawValue = this.getDataValue('gender');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('gender').toUpperCase();
+        },
+        set(value) {
+            this.setDataValue('gender', value.toUpperCase());
+        },
     },
     birthdate: {
         type: DATEONLY,
@@ -75,9 +81,11 @@ const Users = connection.define("users", {
         },
         unique: {msg: { "msg":"Email já está cadastrado.", "status": "409"}},
         get() {
-            const rawValue = this.getDataValue('email');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+          return this.getDataValue('email').toLowerCase()();
+        },
+        set(value) {
+            this.setDataValue('email', value.toLowerCase()());
+        },
     },
     password: {
         type: STRING,

@@ -42,9 +42,11 @@ const Medicines = connection.define("medicines", {
             notNull: {msg: "O campo medicine é obrigatório."}
         },
         get() {
-            const rawValue = this.getDataValue('medicine');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+            return this.getDataValue('medicine').toUpperCase();
+          },
+        set(value) {
+            this.setDataValue('medicine', value.toUpperCase());
+          },
     },
     lab: {
         type: STRING,
@@ -53,17 +55,21 @@ const Medicines = connection.define("medicines", {
             notNull: {msg: "O campo lab é obrigatório."}
         },
         get() {
-            const rawValue = this.getDataValue('lab');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+            return this.getDataValue('lab').toUpperCase();
+          },
+        set(value) {
+            this.setDataValue('lab', value.toUpperCase());
+          },
     },
     desc: {
         type: STRING,
         allowNull: true,
         get() {
-            const rawValue = this.getDataValue('desc');
-            return rawValue ? rawValue.toUpperCase() : null;
-          }
+            return this.getDataValue('desc').toUpperCase();
+          },
+        set(value) {
+            this.setDataValue('desc', value.toUpperCase());
+          },
     },
     dosage: {
         type: DECIMAL,
