@@ -15,6 +15,7 @@ Todos os dados do tipo TEXTO são inseridos no DB com o uso de get() - getters n
 ##### Melhorias Futuras
 
 Serão implementadas os controles de acesso do usuário através do uso RBAC para que as ações no app sejam limitadas ou liberadas por grupos de usuários.
+Também deve ser implemetado a cripitografia da senha antes da gravação no banco de dados. Este processo deverá ser feito no arquivo model de usuário em forma de hook. 
 
 ![Fluxo da API](FluxoAPI.png)
 
