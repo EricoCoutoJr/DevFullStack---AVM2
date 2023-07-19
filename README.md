@@ -10,7 +10,7 @@ Desenvolvimento de um back-end para LabPharmacy Inc. o sistema será codificado 
 Tem o objetivo de permitir que o front-end acesse via http o banco de dados para adicionar, editar, consultar e apagar conteúdos das tabelas usuários, depósitos e medicamentos. O framework Expresse foi utilizado para gestão dos paths http da aplicação e o ORM Sequelize tem o objetivo de gerenciar os acessos e construção do DataBase.
 
 Obs.:
-Todos os dados do tipo TEXTO são inseridos no DB com o uso de get() - getters no models para que estes dados sejam uppercase - `toUpperCase()`. Isso ajuda a opção `unique: true` a evitar duplicidade e situações enque o mesmo texto sejam escritos de forma diferente pelo usuário. Além disso reduz o trabalho de análise de dados por forçar um padrão. Mesmo tendo sido gravado em uppercase é possível ler o valor original. [Click aqui] para ver documentação do [Sequelize] sobre este assunto.
+Todos os dados do tipo TEXTO são inseridos no DB com o uso de [get()] e [set()] - getters e setter no models para que estes dados sejam uppercase - `toUpperCase()`. Isso ajuda a opção `unique: true` a evitar duplicidade e situações em que o mesmo texto sejam escritos de forma diferente pelo usuário. As colunas de email também fizeram uso do [get()] e [set()] para  que sejam mantidos em lowercase. Além disso reduz o trabalho de ETL de dados por forçar um padrão.  [Click aqui] para ver documentação do [Sequelize] sobre este assunto.
 
 ##### Melhorias Futuras
 
@@ -113,3 +113,5 @@ npm install nodemon --save-dev
 [Express]: https://www.npmjs.com/package/express
 [PostgreSQL]: https://www.postgresql.org/
 [NodeJS]: https://nodejs.org/en
+[get()]: https://sequelize.org/docs/v6/core-concepts/getters-setters-virtuals/
+[set()]: https://sequelize.org/docs/v6/core-concepts/getters-setters-virtuals/
