@@ -1,5 +1,7 @@
 const { STRING, DATE, INTEGER, DataTypes, DECIMAL } = require('sequelize')
 const { connection } = require('../database/connection')
+const { Users } = require('./users')
+// const { Warehouses } = require('./warehouses')
 
 
 const Medicines = connection.define("medicines", {
@@ -84,14 +86,14 @@ const Medicines = connection.define("medicines", {
         }
     },
     type:{
-        type: DataTypes.ENUM('CONTROLADO', 'NÃO CONTROLADO'),
+        type: DataTypes.ENUM('Controlado', 'Não controlado'),
         allowNull: false,
         validate: {
             notNull: {
               msg: 'O campo type é obrigatória.'
             },
             isIn: {
-              args: [['CONTROLADO', 'NÃO CONTROLADO']],
+              args: [['Controlado', 'Não controlado']],
               msg: 'O campo type só pode receber os seguintes valores: Controlado, Não controlado'
             }
         }
@@ -125,6 +127,17 @@ const Medicines = connection.define("medicines", {
     deletedAt: DATE
 },
 { underscored: true, paranoid: true });
+
+Medicines.beforeCreate(async (medicines, options) =>{
+    // const warehouse = await Warehouses.findByPk(medicines.warehouse_id)
+    const users = await Users.findByPk(medicines.created_by)
+    if (!users){
+        throw new Error('Não é possível incluir o medicamento, pois o usuário definido no created_by não existe.');
+    };
+    // if (!warehouse){
+    //     throw new Error('Não é possível incluir o medicamento, pois o depósito definido no warehouse_id não existe.')
+    // }
+});
 
 Medicines.associate = (models) => {
     // Pertende a um usuário ( User )

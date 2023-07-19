@@ -1,5 +1,8 @@
 const { STRING, DATE, INTEGER, FLOAT, DataTypes } = require('sequelize')
 const { connection } = require('../database/connection')
+const { Medicines } = require('./medicines')
+const { Users } = require('./users')
+
 
 
 const Warehouses = connection.define("warehouses", {
@@ -185,8 +188,8 @@ const Warehouses = connection.define("warehouses", {
     status:{
         // Neste campo da tabela o item status as opções estão limitadas entre Ativo e Inativo
         // e por defaut assumirá como Ativo
-        type: DataTypes.ENUM('ATIVO', 'INATIVO'),
-        defaultValue: 'ATIVO',
+        type: DataTypes.ENUM('Ativo', 'Inativo'),
+        defaultValue: 'Ativo',
         allowNull: false
     },
     createdAt: DATE,
@@ -195,14 +198,34 @@ const Warehouses = connection.define("warehouses", {
 },
 { underscored: true, paranoid: true })
 
-Warehouses.associate = (models) => {
+Warehouses.beforeDestroy(async (warehouses, options) => {
+    // Consulta para verificar se há medicines associadas a esse warehouse
+    const medicines = await Medicines.findOne({ where: { warehouse_id: warehouses.id } });
+  
+    if (medicines) {
+      throw new Error('Não é possível excluir o depósito, pois existem medicamentos associadas a ele.');
+    }
+    // Consultar para ver se o depósito está ativo
+    if (warehouses.status === 'Ativo') {
+        throw new Error('Não é possível excluir um depósito com status ATIVO.');
+      }
+  });
+
+Warehouses.beforeCreate(async (warehouses, options) =>{
+  const user = await Users.findByPk(warehouses.created_by)
+  if (!user){
+    throw new Error('Não é possível incluir o depósito, pois o usuário definido no created_by não existe.');
+  }
+});
+
+Warehouses.associate = () => {
     // Pertence a User id - ( 1 User do Users)
-    Warehouses.belongsTo(models.Users, {
+    Warehouses.belongsTo(Users, {
       foreignKey: 'created_id',
       allowNull: false
     });
     // Tem muitos medicamentos warehouse_id - ( Warehouses )
-    Warehouses.hasMany(models.Medicines, {
+    Warehouses.hasMany(Medicines, {
       foreignKey: 'warehouse_id',
       allowNull: false,
     });

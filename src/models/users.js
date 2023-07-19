@@ -93,8 +93,8 @@ const Users = connection.define("users", {
     status:{
         // Neste campo da tabela o item status as opções estão limitadas entre Ativo e Inativo
         // e por defaut assumirá como Ativo
-        type: DataTypes.ENUM('ATIVO', 'INATIVO'),
-        defaultValue: 'ATIVO',
+        type: DataTypes.ENUM('Ativo', 'Inativo'),
+        defaultValue: 'Ativo',
         allowNull: false
     },
     createdAt: DATE,

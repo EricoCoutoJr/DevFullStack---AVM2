@@ -133,7 +133,7 @@ class UsersController{
             if (!user) return response.status(404).send({
                                                             msg: 'Usuário não encontrado.'
                                                         })
-            const status = ( user.status === "ATIVO" ) ? 'INATIVO' : 'ATIVO'
+            const status = ( user.status === "Ativo" ) ? 'Inativo' : 'Ativo'
             await Users.update(
                 { status },
                 { where: { id } }

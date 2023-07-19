@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config();
 const { Medicines } = require('../models/medicines')
+const { Warehouses } = require('../models/warehouses')
 
 class MedicinesController {
     async createOneMedicine(request,response){
@@ -18,7 +19,6 @@ class MedicinesController {
                 price,
                 quantiti
             } = request.body
-            console.log(quantiti)
             // Para testar se há o mesmo medicamento igual no estoque
             // Se houver medicamentos iguais com laboratórios diferentes, em depósitos diferentes,
             // e dosagem diferente poderá ser inserido na tabela.
@@ -26,7 +26,10 @@ class MedicinesController {
             // no depósito.
             // Existem a possibilidade de termos medicamento iguais, no mesmo depósito e do mesmo
             // laboratório mas com dosagem diferentes. Ex.: Paracetamol 500mg e Paracetamol 750mg do mesmo Lab
-
+            const warehouse = await Warehouses.findByPk(warehouse_id)
+            if (!warehouse){
+                throw new Error('Não é possível incluir o medicamento, pois o depósito definido no warehouse_id não existe.')
+            }
             const med = await Medicines.findOne({
                 where: {
                   warehouse_id: {
@@ -55,7 +58,7 @@ class MedicinesController {
                     type,
                     price,
                     quantiti,
-                })
+                },{individualHooks: true})
                 
                 return response.status(200).send(data)
             } else {

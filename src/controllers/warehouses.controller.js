@@ -138,7 +138,7 @@ class WarehousesController {
             if (!warehouse) return response.status(404).send({
                                                             msg: 'Depósito não encontrado.'
                                                         })
-            const status = ( warehouse.status === "ATIVO" ) ? 'INATIVO' : 'ATIVO'
+            const status = ( warehouse.status === "Ativo" ) ? 'Inativo' : 'Ativo'
             await Warehouses.update(
                 { status },
                 { where: { id } }
@@ -216,34 +216,22 @@ class WarehousesController {
     async deleteWarehouseById(request, response){
         try {
             const { id } = request.params
-            const warehouse = await Warehouses.findByPk(id, {
-                include: {
-                    model: Medicines,
-                    attributes: ['id'], // Lista dos IDs dos medicamentos
-                    required: false // Define que a associação não é obrigatória
-                }
-            });
+            const warehouse = await Warehouses.findByPk(id)
         
-            if (warehouse) {
-                if (warehouse.Medicines.length > 0){// Retorna true se existem medicamentos, false caso contrário
-                    return response.status(401).send({msg:'Tem medicamento no depósito'})
-                };
-                if (warehouse.status === "Ativo"){
-                    return response.status(401).send({msg: 'Depósito ainda está ativo.'})
-                }
-            } else {
+            if (!warehouse) {
                 return response.status(404).send({msg:'Depósito não encontrado.'});
             }
-            // Colocar aqui do const data = Warehouse.distroy(whare:{id})
-            return response.status(204).send('Depósito removido.')
+            // As regras que impedem a deleção estão no hook no arquivo warehouses models
+            // É necessário informar que tem um hook a ser usado no model
+            const data = await Warehouses.destroy({where:{id}, individualHooks: true})
+
+            return response.status(204).send(data)
         } catch (error) {
-            const statusCode = error.message.status || 400;
-            const message = error.message.msg || error.message;
             
-            return response.status(parseInt(statusCode)).send(
+            return response.status(400).send(
                 {
                     msg: "Erro enviado do banco de dados",
-                    cause: message
+                    cause: error.message
                 }
             )
         }
