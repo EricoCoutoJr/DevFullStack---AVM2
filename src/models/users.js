@@ -81,10 +81,10 @@ const Users = connection.define("users", {
         },
         unique: {msg: { "msg":"Email já está cadastrado.", "status": "409"}},
         get() {
-          return this.getDataValue('email').toLowerCase()();
+          return this.getDataValue('email').toLowerCase();
         },
         set(value) {
-            this.setDataValue('email', value.toLowerCase()());
+            this.setDataValue('email', value.toLowerCase());
         },
     },
     password: {
