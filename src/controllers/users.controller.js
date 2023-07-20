@@ -2,6 +2,7 @@ const { sign } = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 const { Users  } = require('../models/users')
+const { checkBody } = require('../services/checkBody')
 
 class UsersController{
     async createOneUser(request, response){
@@ -17,7 +18,21 @@ class UsersController{
                 email,
                 password
             } = request.body;
-          
+            const keysAllowed = [
+                name,
+                lastname,
+                gender,
+                birthdate,
+                cpf,
+                fone,
+                email,
+                password
+            ]
+            if (checkBody(keysAllowed,request.body)){
+                return response.status(400).send({
+                    msg: 'Algum campo enviado não é permitido.'
+                })
+            }
             const data = await Users.create({
                 name,
                 lastname,
@@ -89,8 +104,20 @@ class UsersController{
                 name,
                 lastname,
                 gender,
-                fone,
+                fone
             } = request.body;
+            const keysAllowed = [
+                name,
+                lastname,
+                gender,
+                fone
+            ]
+            if (checkBody(keysAllowed,request.body)){
+                return response.status(400).send({
+                    msg: 'Algum campo enviado não é permitido.'
+                })
+            }
+
             const { id } = request.params
             const idtest = parseInt(id)
             if ( idtest <= 0 || isNaN(idtest) ){
@@ -100,7 +127,7 @@ class UsersController{
             }
             if (!name && !lastname && !gender && !fone) {
                 return response.status(400).send({
-                    msg: 'Não há parametros para atualizar o registro.'
+                    msg: 'Não há parametros para atualizar o registro'
                 })
             }
             const user = await Users.findOne({ where: { id }})

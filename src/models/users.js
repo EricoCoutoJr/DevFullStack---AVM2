@@ -11,7 +11,7 @@ const Users = connection.define("users", {
             notNull: {msg: "O campo name é obrigatório."}
         },
         get() {
-          return this.getDataValue('name').toUpperCase();
+          return this.getDataValue('name');
         },
         set(value) {
             this.setDataValue('name', value.toUpperCase());
@@ -26,7 +26,7 @@ const Users = connection.define("users", {
                 notNull: { msg: "O campo lastname é obrigatório."}
         },
         get() {
-          return this.getDataValue('lastname').toUpperCase();
+          return this.getDataValue('lastname');
         },
         set(value) {
             this.setDataValue('lastname', value.toUpperCase());
@@ -36,7 +36,7 @@ const Users = connection.define("users", {
         type: STRING,
         allowNull: true,
         get() {
-          return this.getDataValue('gender').toUpperCase();
+          return this.getDataValue('gender');
         },
         set(value) {
             this.setDataValue('gender', value.toUpperCase());
@@ -57,6 +57,7 @@ const Users = connection.define("users", {
     cpf: {
         type: STRING,
         allowNull: false,
+        readOnly: {msg :"Não é possível alterar O CPF do Usuário."},
         validate: {   
           len: {
             args: [11, 11],
@@ -75,13 +76,14 @@ const Users = connection.define("users", {
     email: {
         type: STRING,
         allowNull: false,
+        readOnly: {msg:"Email não pode ser alterado."},
         validate:{
             isEmail: {msg: "Email Invalido"},
             notNull: { msg: "O campo email é obrigatório" }
         },
         unique: {msg: { "msg":"Email já está cadastrado.", "status": "409"}},
         get() {
-          return this.getDataValue('email').toLowerCase();
+          return this.getDataValue('email');
         },
         set(value) {
             this.setDataValue('email', value.toLowerCase());

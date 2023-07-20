@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config();
 const { Warehouses } = require('../models/warehouses')
-const { Medicines } = require('../models/medicines')
+const { checkBody } = require('../services/checkBody')
 
 class WarehousesController {
     async createOneWarehouse(request,response){
@@ -25,7 +25,28 @@ class WarehousesController {
                     lat,
                     lng
             } = request.body
-            
+            const keysAllowed = [                    
+                created_by,
+                razaosocial,
+                nomefantasia,
+                cnpj,
+                email,
+                fone,
+                cellfone,
+                cep,
+                street,
+                num,
+                neighborhood,
+                city,
+                state,
+                complement,
+                lat,
+                lng]
+            if (checkBody(keysAllowed,request.body)){
+                return response.status(400).send({
+                    msg: 'Algum campo enviado não é permitido.'
+                })
+            }
             const data = await Warehouses.create({
                 created_by,
                 razaosocial,
@@ -76,6 +97,25 @@ class WarehousesController {
                 lat,
                 lng
             } = request.body
+            const keysAllowed = ['nomefantasia',
+                'email',
+                'fone',
+                'celfone',
+                'cep',
+                'street',
+                'num',
+                'neighborhood',
+                'city',
+                'state',
+                'complement',
+                'lat',
+                'lng'];
+            if (checkBody(keysAllowed,request.body)){
+                return response.status(400).send({
+                    msg: 'Algum campo enviado não é permitido atualizar.'
+                })
+            }
+
             const idtest = parseInt(id)
             if ( idtest <= 0 || isNaN(idtest) ){
                 return response.status(400).send({

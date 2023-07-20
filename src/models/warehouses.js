@@ -29,10 +29,11 @@ const Warehouses = connection.define("warehouses", {
         validate: {
             notNull: {
               msg: 'A Razão Social é obrigatório.' // Mensagem de erro personalizada
-        }},
+        },
+      },
         unique: { msg: {"msg": "Razão Social já cadastrada.", "status": "409"}},
         get() {
-          return this.getDataValue('razaosocial').toUpperCase();
+          return this.getDataValue('razaosocial');
         },
         set(value) {
             this.setDataValue('razaosocial', value.toUpperCase());
@@ -46,7 +47,7 @@ const Warehouses = connection.define("warehouses", {
                   msg: 'O Nome Fantasia é obrigatório.' // Mensagem de erro personalizada
             }},
             get() {
-              return this.getDataValue('nomefantasia').toUpperCase();
+              return this.getDataValue('nomefantasia');
             },
             set(value) {
                 this.setDataValue('nomefantasia', value.toUpperCase());
@@ -73,7 +74,7 @@ const Warehouses = connection.define("warehouses", {
         },
         unique: { msg: {"msg": "Email já cadastrado.", "status": "409"}},
         get() {
-          return this.getDataValue('email').toLowerCase();
+          return this.getDataValue('email');
         },
         set(value) {
             this.setDataValue('email', value.toLowerCase());
@@ -103,7 +104,7 @@ const Warehouses = connection.define("warehouses", {
               msg: 'O nome da rua é obrigatório.' // Mensagem de erro personalizada
         }},
         get() {
-          return this.getDataValue('street').toUpperCase();
+          return this.getDataValue('street');
         },
         set(value) {
             this.setDataValue('street', value.toUpperCase());
@@ -125,7 +126,7 @@ const Warehouses = connection.define("warehouses", {
               msg: 'O nome doo bairro é obrigatório.' // Mensagem de erro personalizada
         }},
         get() {
-          return this.getDataValue('neighborhood').toUpperCase();
+          return this.getDataValue('neighborhood');
         },
         set(value) {
             this.setDataValue('neighborhood', value.toUpperCase());
@@ -139,7 +140,7 @@ const Warehouses = connection.define("warehouses", {
               msg: 'O nome da cidade é obrigatório.' // Mensagem de erro personalizada
         }},
         get() {
-          return this.getDataValue('city').toUpperCase();
+          return this.getDataValue('city');
         },
         set(value) {
             this.setDataValue('city', value.toUpperCase());
@@ -153,7 +154,7 @@ const Warehouses = connection.define("warehouses", {
               msg: 'O Estado é obrigatório.' // Mensagem de erro personalizada
         }},
         get() {
-          return this.getDataValue('state').toUpperCase();
+          return this.getDataValue('state');
         },
         set(value) {
             this.setDataValue('state', value.toUpperCase());
@@ -163,7 +164,7 @@ const Warehouses = connection.define("warehouses", {
         type: STRING,
         allowNull: true,
         get() {
-          return this.getDataValue('complement').toUpperCase();
+          return this.getDataValue('complement');
         },
         set(value) {
             this.setDataValue('complement', value.toUpperCase());

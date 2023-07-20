@@ -40,7 +40,7 @@ const Medicines = connection.define("medicines", {
             notNull: {msg: "O campo medicine é obrigatório."}
         },
         get() {
-            return this.getDataValue('medicine').toUpperCase();
+            return this.getDataValue('medicine');
           },
         set(value) {
             this.setDataValue('medicine', value.toUpperCase());
@@ -53,7 +53,7 @@ const Medicines = connection.define("medicines", {
             notNull: {msg: "O campo lab é obrigatório."}
         },
         get() {
-            return this.getDataValue('lab').toUpperCase();
+            return this.getDataValue('lab');
           },
         set(value) {
             this.setDataValue('lab', value.toUpperCase());
@@ -63,7 +63,7 @@ const Medicines = connection.define("medicines", {
         type: STRING,
         allowNull: true,
         get() {
-            return this.getDataValue('desc').toUpperCase();
+            return this.getDataValue('desc');
           },
         set(value) {
             this.setDataValue('desc', value.toUpperCase());

@@ -1,6 +1,7 @@
 const { Op } = require('sequelize');
 const dotenv = require('dotenv');
 dotenv.config();
+const {checkBody } = require('../services/checkBody')
 const { Medicines } = require('../models/medicines')
 class MedicinesController {
     async createOneMedicine(request,response){
@@ -17,6 +18,25 @@ class MedicinesController {
                 price,
                 quantiti
             } = request.body
+
+            const keysAllowed = [
+                created_by,
+                warehouse_id,
+                medicine,
+                lab,
+                desc,
+                dosage,
+                unit,
+                type,
+                price,
+                quantiti
+            ]
+            if (checkBody(keysAllowed,request.body)){
+                return response.status(400).send({
+                    msg: 'Algum campo enviado não é permitido.'
+                })
+            }
+
             // Para testar se há o mesmo medicamento igual no estoque
             // Se houver medicamentos iguais com laboratórios diferentes, em depósitos diferentes,
             // e dosagem diferente poderá ser inserido na tabela.
@@ -81,6 +101,16 @@ class MedicinesController {
                 quantiti
             } = request.body
 
+            const keysAllowed = [
+                desc,
+                price,
+                quantiti
+            ]
+            if (checkBody(keysAllowed,request.body)){
+                return response.status(400).send({
+                    msg: 'Algum campo enviado não é permitido.'
+                })
+            }
             const { id } = request.params
             const idtest = parseInt(id)
 
