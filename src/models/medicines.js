@@ -1,7 +1,5 @@
 const { STRING, DATE, INTEGER, DataTypes, DECIMAL } = require('sequelize')
 const { connection } = require('../database/connection')
-const { Users } = require('./users')
-// const { Warehouses } = require('./warehouses')
 
 
 const Medicines = connection.define("medicines", {
@@ -135,14 +133,18 @@ const Medicines = connection.define("medicines", {
 { underscored: true, paranoid: true });
 
 Medicines.beforeCreate(async (medicines, options) =>{
-    // const warehouse = await Warehouses.findByPk(medicines.warehouse_id)
+    const { Users } = require('./users')
+    const { Warehouses } = require('./warehouses')
+
+    const warehouse = await Warehouses.findByPk(medicines.warehouse_id)
     const users = await Users.findByPk(medicines.created_by)
+
     if (!users){
         throw new Error('Não é possível incluir o medicamento, pois o usuário definido no created_by não existe.');
     };
-    // if (!warehouse){
-    //     throw new Error('Não é possível incluir o medicamento, pois o depósito definido no warehouse_id não existe.')
-    // }
+    if (!warehouse){
+        throw new Error('Não é possível incluir o medicamento, pois o depósito definido no warehouse_id não existe.')
+    }
 });
 
 Medicines.associate = (models) => {
