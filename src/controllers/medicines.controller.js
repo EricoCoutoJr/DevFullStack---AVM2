@@ -20,16 +20,16 @@ class MedicinesController {
             } = request.body
 
             const keysAllowed = [
-                created_by,
-                warehouse_id,
-                medicine,
-                lab,
-                desc,
-                dosage,
-                unit,
-                type,
-                price,
-                quantiti
+                "created_by",
+                "warehouse_id",
+                "medicine",
+                "lab",
+                "desc",
+                "dosage",
+                "unit",
+                "type",
+                "price",
+                "quantiti"
             ]
             if (checkBody(keysAllowed,request.body)){
                 return response.status(400).send({
@@ -102,9 +102,9 @@ class MedicinesController {
             } = request.body
 
             const keysAllowed = [
-                desc,
-                price,
-                quantiti
+                "desc",
+                "price",
+                "quantiti"
             ]
             if (checkBody(keysAllowed,request.body)){
                 return response.status(400).send({

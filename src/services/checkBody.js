@@ -1,8 +1,10 @@
 function checkBody(keysAllowed,keysSent) {
-    const keyNotAllowed = Object.keys(keysSent).filter(key => !(key in keysAllowed));
+    let keyNotAllowed = []
+    keyNotAllowed = Object.keys(keysSent).filter(key => (!keysAllowed.includes(key)));
     if (keyNotAllowed.length>0) {
         return true
     }
+    return false
 }
 
 module.exports = { checkBody }

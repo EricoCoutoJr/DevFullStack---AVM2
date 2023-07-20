@@ -19,20 +19,22 @@ class UsersController{
                 password
             } = request.body;
             const keysAllowed = [
-                name,
-                lastname,
-                gender,
-                birthdate,
-                cpf,
-                fone,
-                email,
-                password
+                "name",
+                "lastname",
+                "gender",
+                "birthdate",
+                "cpf",
+                "fone",
+                "email",
+                "password"
             ]
+
             if (checkBody(keysAllowed,request.body)){
                 return response.status(400).send({
                     msg: 'Algum campo enviado não é permitido.'
                 })
             }
+
             const data = await Users.create({
                 name,
                 lastname,
@@ -107,10 +109,10 @@ class UsersController{
                 fone
             } = request.body;
             const keysAllowed = [
-                name,
-                lastname,
-                gender,
-                fone
+                "name",
+                "lastname",
+                "gender",
+                "fone"
             ]
             if (checkBody(keysAllowed,request.body)){
                 return response.status(400).send({

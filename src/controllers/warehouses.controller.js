@@ -26,22 +26,22 @@ class WarehousesController {
                     lng
             } = request.body
             const keysAllowed = [                    
-                created_by,
-                razaosocial,
-                nomefantasia,
-                cnpj,
-                email,
-                fone,
-                cellfone,
-                cep,
-                street,
-                num,
-                neighborhood,
-                city,
-                state,
-                complement,
-                lat,
-                lng]
+                "created_by",
+                "razaosocial",
+                "nomefantasia",
+                "cnpj",
+                "email",
+                "fone",
+                "cellfone",
+                "cep",
+                "street",
+                "num",
+                "neighborhood",
+                "city",
+                "state",
+                "complement",
+                "lat",
+                "lng"]
             if (checkBody(keysAllowed,request.body)){
                 return response.status(400).send({
                     msg: 'Algum campo enviado não é permitido.'
