@@ -257,15 +257,14 @@ class WarehousesController {
         try {
             const { id } = request.params
             const warehouse = await Warehouses.findByPk(id)
-        
             if (!warehouse) {
                 return response.status(404).send({msg:'Depósito não encontrado.'});
             }
             // As regras que impedem a deleção estão no hook no arquivo warehouses models
             // É necessário informar que tem um hook a ser usado no model
-            const data = await Warehouses.destroy({where:{id}, individualHooks: true})
+            await Warehouses.destroy({where:{id}, individualHooks: true})
 
-            return response.status(204).send(data)
+            return response.status(204).send()
         } catch (error) {
             
             return response.status(400).send(
