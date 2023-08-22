@@ -9,8 +9,9 @@ on:
 
 jobs:
   build:
-    name: Build CI
+    name: Node CI
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
@@ -18,19 +19,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install
-    - run: npm run start
-    #- run: npm test
+    - run: npm ci
+    - run: npm run start --if-present
   
   docker: 
     name: DockerHub CD
     runs-on: ubuntu-latest
-    needs: Build
+    needs: build
     steps: 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
