@@ -3,9 +3,9 @@
 name: Node CI
 
 on:
-  push:
-    branches: [ "teste" ]
-
+  pul_request:
+    branches: [ "main" ]
+    
 jobs:
   build:
     name: Build CI
