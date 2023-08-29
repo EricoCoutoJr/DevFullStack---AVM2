@@ -4,9 +4,10 @@
 name: Node CI
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
+    
 jobs:
   build:
     name: Build CI
