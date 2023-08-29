@@ -169,7 +169,7 @@ class UsersController{
             )
             return response.status(200).send('Status atualizado para '+ status)
         } catch (error) {
-            return response.status(401).send({
+            return response.status(400).send({
                 msg: "Erro enviado do banco de dados",
                 error: error.message
             })
@@ -223,7 +223,7 @@ class UsersController{
                                                         })
             return response.status(200).send({user})
         } catch (error) {
-            return response.status(401).send({
+            return response.status(400).send({
                 msg: "Erro enviado do banco de dados",
                 error: error.message
             })
