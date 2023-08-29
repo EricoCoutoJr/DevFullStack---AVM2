@@ -3,7 +3,7 @@
 name: Node CI
 
 on:
-  pul_request:
+  pull_request:
     branches: [ "main" ]
     
 jobs:
