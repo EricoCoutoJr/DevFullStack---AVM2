@@ -42,9 +42,11 @@ const Medicines = connection.define("medicines", {
         get() {
             return this.getDataValue('medicine');
           },
-        set(value) {
-            this.setDataValue('medicine', value.toUpperCase());
-          },
+          set(value) {
+            if (value) {
+                this.setDataValue('medicine', value.toUpperCase());
+            }
+        },
     },
     lab: {
         type: STRING,
@@ -55,9 +57,11 @@ const Medicines = connection.define("medicines", {
         get() {
             return this.getDataValue('lab');
           },
-        set(value) {
-            this.setDataValue('lab', value.toUpperCase());
-          },
+          set(value) {
+            if (value) {
+                this.setDataValue('lab', value.toUpperCase());
+            }
+        },
     },
     desc: {
         type: STRING,
@@ -65,9 +69,11 @@ const Medicines = connection.define("medicines", {
         get() {
             return this.getDataValue('desc');
           },
-        set(value) {
-            this.setDataValue('desc', value.toUpperCase());
-          },
+          set(value) {
+            if (value) {
+                this.setDataValue('desc', value.toUpperCase());
+            }
+        },
     },
     dosage: {
         type: DECIMAL,
@@ -90,15 +96,15 @@ const Medicines = connection.define("medicines", {
         }
     },
     type:{
-        type: DataTypes.ENUM('Controlado', 'Não controlado'),
+        type: DataTypes.ENUM('CONTROLADO', 'NÃO CONTROLADO'),
         allowNull: false,
         validate: {
             notNull: {
               msg: 'O campo type é obrigatória.'
             },
             isIn: {
-              args: [['Controlado', 'Não controlado']],
-              msg: 'O campo type só pode receber os seguintes valores: Controlado, Não controlado'
+              args: [['CONTROLADO', 'NÃO CONTROLADO']],
+              msg: "O campo type só pode receber os seguintes valores: 'CONTROLADO', 'NÃO CONTROLADO'"
             }
         }
     },

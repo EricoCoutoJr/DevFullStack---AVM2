@@ -14,8 +14,10 @@ const Users = connection.define("users", {
           return this.getDataValue('name');
         },
         set(value) {
-            this.setDataValue('name', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('name', value.toLowerCase());
+          }
+      },
     },
     lastname: {
             type: STRING,
@@ -29,8 +31,10 @@ const Users = connection.define("users", {
           return this.getDataValue('lastname');
         },
         set(value) {
-            this.setDataValue('lastname', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('lastname', value.toLowerCase());
+          }
+      },
     },
     gender:{
         type: STRING,
@@ -39,8 +43,10 @@ const Users = connection.define("users", {
           return this.getDataValue('gender');
         },
         set(value) {
-            this.setDataValue('gender', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('gender', value.toLowerCase());
+          }
+      },
     },
     birthdate: {
         type: DATEONLY,
@@ -78,16 +84,18 @@ const Users = connection.define("users", {
         allowNull: false,
         readOnly: {msg:"Email não pode ser alterado."},
         validate:{
-            isEmail: {msg: "Email Invalido"},
-            notNull: { msg: "O campo email é obrigatório" }
+          isEmail: {msg: "Email Invalido"},
+          notNull: { msg: "O campo email é obrigatório" }
         },
         unique: {msg: { "msg":"Email já está cadastrado.", "status": "409"}},
         get() {
           return this.getDataValue('email');
         },
         set(value) {
-            this.setDataValue('email', value.toLowerCase());
-        },
+          if (value) {
+              this.setDataValue('email', value.toLowerCase());
+          }
+      },
     },
     password: {
         type: STRING,
