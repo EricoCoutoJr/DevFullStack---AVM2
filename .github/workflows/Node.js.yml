@@ -1,12 +1,10 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-# Teste in branch to marge
 name: Node CI
 
 on:
-  push:
+  pul_request:
     branches: [ "main" ]
-
     
 jobs:
   build:
@@ -27,6 +25,7 @@ jobs:
     - run: npm install
     - run: npm run build
   
+    
   Docker: 
     name: Dockerhub CD
     runs-on: ubuntu-latest
@@ -40,7 +39,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ vars.DOCKEHUB_USUARIO }}
-          password: ${{ secrets.DOCKERHUB_TOKEN}}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v4
         with:

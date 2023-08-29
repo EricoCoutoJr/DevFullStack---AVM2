@@ -36,8 +36,10 @@ const Warehouses = connection.define("warehouses", {
           return this.getDataValue('razaosocial');
         },
         set(value) {
-            this.setDataValue('razaosocial', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('razaosocial', value.toUpperCase());
+          }
+      },
     },
     nomefantasia: {
             type: STRING,
@@ -50,8 +52,10 @@ const Warehouses = connection.define("warehouses", {
               return this.getDataValue('nomefantasia');
             },
             set(value) {
-                this.setDataValue('nomefantasia', value.toUpperCase());
-            },
+              if (value) {
+                  this.setDataValue('nomefantasia', value.toUpperCase());
+              }
+          },
     },
     cnpj: {
         type: STRING,
@@ -77,8 +81,10 @@ const Warehouses = connection.define("warehouses", {
           return this.getDataValue('email');
         },
         set(value) {
-            this.setDataValue('email', value.toLowerCase());
-        },
+          if (value) {
+              this.setDataValue('email', value.toLowerCase());
+          }
+      },
     },
     fone: {
         type: STRING,
@@ -107,8 +113,10 @@ const Warehouses = connection.define("warehouses", {
           return this.getDataValue('street');
         },
         set(value) {
-            this.setDataValue('street', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('street', value.toUpperCase());
+          }
+      },
     },
     num:{
         type: STRING,
@@ -129,8 +137,10 @@ const Warehouses = connection.define("warehouses", {
           return this.getDataValue('neighborhood');
         },
         set(value) {
-            this.setDataValue('neighborhood', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('neighborhood', value.toUpperCase());
+          }
+      },
     },
     city: {
         type: STRING,
@@ -143,8 +153,10 @@ const Warehouses = connection.define("warehouses", {
           return this.getDataValue('city');
         },
         set(value) {
-            this.setDataValue('city', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('city', value.toUpperCase());
+          }
+      },
     },
     state: {
         type: STRING,
@@ -157,8 +169,10 @@ const Warehouses = connection.define("warehouses", {
           return this.getDataValue('state');
         },
         set(value) {
-            this.setDataValue('state', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('state', value.toUpperCase());
+          }
+      },
     },
     complement: {
         type: STRING,
@@ -167,8 +181,10 @@ const Warehouses = connection.define("warehouses", {
           return this.getDataValue('complement');
         },
         set(value) {
-            this.setDataValue('complement', value.toUpperCase());
-        },
+          if (value) {
+              this.setDataValue('complement', value.toUpperCase());
+          }
+      },
     },
     lat: {        
         type: FLOAT,
