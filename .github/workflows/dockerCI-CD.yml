@@ -5,7 +5,7 @@ name: Docker CI/CD
 
 on:
   push:
-    branches: [ "teste" ]
+    branches: [ "main" ]
 
 jobs:
   Docker: 
