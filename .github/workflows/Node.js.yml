@@ -24,6 +24,13 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm run build
+    env:
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }} 
+      DB_DIALECT: ${{ vars.DB_DIALECT }}
+      DB_HOST: ${{ vars.DB_HOST }}
+      DB_NAME: ${{ vars.DB_NAME }}
+      DB_PORT: ${{ vars.DB_PORT }}
+      DB_USER: ${{ vars.DB_USER }}
   
     
   Docker: 
